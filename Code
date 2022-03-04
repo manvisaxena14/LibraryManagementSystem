@@ -1,0 +1,1944 @@
+//________________________________________________________________________
+//                 BEGINNING OF THE PROJECT
+//------------------------------------------------------------------------
+
+
+//*********************INCLUDED HEADER FILES*****************************
+
+#include <iostream.h>
+#include <fstream.h>
+#include <process.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
+#include <dos.h>
+
+
+
+// THIS CLASS CONTAINS FUNCTIONS RELATED TO
+//             BOOKS   (CLASS 1)
+
+
+class BOOK
+  {
+     public :
+       void table() ;
+       char *b_name(int) ;
+
+
+     protected :
+       void add_book(int, char tname[33], char tauthor[26], float, int, int) ;
+       void update_copies(int, int, int) ;
+       void change(int, char[], char[], float) ;
+       void deletion() ;
+       int  b_found(int) ;
+       int  b_name_found(char []) ;
+       int  recordno(int) ;
+       int  available(int) ;
+       char *a_name(int) ;
+       float b_price(int) ;
+       int  no_of_copies(int) ;
+       int  b_codeof(char[]) ;
+       void display(int) ;
+       int  reccount() ;
+       void delete_rec(int) ;
+
+     private :
+       int   bookcode, copies ;
+       char  name[33], author[26] ;
+       float price ;
+       int   avail ;
+  };
+
+
+
+// THIS CLASS CONTAINS FUNCTIONS RELATED TO
+//             MEMBERS (CLASS 2)
+
+
+
+class MEMBER
+  {
+     public :
+       void jot() ;
+
+     protected :
+       void add_mem(int,int,char[],char[],char[]) ;
+       void mod(int,char[],char[],char[]) ;
+       void deletion() ;
+       int  m_found(int) ;
+       void update_b(int,int) ;
+       char *m_name(int) ;
+       char *m_phone(int) ;
+       char *m_address(int) ;
+       int  recordno(int) ;
+       int  ltcode() ;
+       int  issued(int) ;
+	void display(int) ;
+       void del_rec(int) ;
+
+     private :
+       int  memcode,bookcode ;
+       char name[26],phone[10],address[33] ;
+  };
+
+
+
+// THIS IS DERIVED FROM THE BASE CLASSES
+//      BOOK & MEMBER (CLASS 3 : DERIVED CLASS 1)
+
+
+
+class WORKING : public BOOK, public MEMBER  //INHERITING PUBLIC MEMBERS
+  {
+     public :
+	void issue_b();
+	void return_b();    int flag;
+	void add_b();
+	void add_m();
+	void modify_b();
+	void modify_m();
+	void delete_b();
+	void delete_m();
+  };
+
+       void ed_menu() ;
+       void ed_book() ; //Editing funcntions
+       void ed_member() ;
+
+
+//*******************DRIVER FUNCTON OF THE  PROJECT************************
+
+       //*****MAIN EXECUTION OF THE PROGRAMME BEGINS NOW******
+
+void main()
+  {
+     clrscr();
+     char ch;
+
+     do
+	 {
+	clrscr();
+	gotoxy(29,6);
+	cout<<"~~~~~~~~~~~~~~~~~~~~~~";
+	gotoxy(29,7);
+	cout<<"B O O K  L I B R A R Y";
+	gotoxy(29,9);
+	cout<<"~~~~~~~~~~~~~~~~~~~~~~";
+	gotoxy(30,11);
+	cout<<" 1. INTRODUCTION";
+	gotoxy(30,12);
+	cout<<" 2. ADD NEW BOOK";
+	gotoxy(30,13);
+	cout<<" 3. ADD NEW MEMBER";
+	gotoxy(30,14);
+	cout<<" 4. ISSUE BOOK";
+	gotoxy(30,15);
+	cout<<" 5. RETURN BOOK";
+	gotoxy(30,16);
+	cout<<" 6. LIST OF BOOKS";
+	gotoxy(30,17);
+	cout<<" 7. LIST OF MEMBERS";
+	gotoxy(30,18);
+	cout<<" 8. EDIT";
+	gotoxy(30,19);
+	cout<<" 9. QUIT";
+	gotoxy(30,23);
+	cout<<"ENTER YOUR CHOICE : ";
+	ch=getche();
+	switch (ch)
+	{
+	case'1':
+	  clrscr();
+	  textcolor (WHITE+BLINK);
+	  gotoxy (15,5);
+	  cout<<"<*> WELCOME TO YOUR OWN LIBRARY MANAGEMENT SYSTEM <*>";
+	  gotoxy (15,8);
+	  cout<<"* BOOK RECORDS CAN BE ENTERED *";
+	  gotoxy (15,10);
+	  cout<<"* LIBRARY CARDS TO ITS MEMEBERS CAN BE ISSUED *";
+
+	  gotoxy (15,12);
+	  cout<<"* PLEASE FILL THE DATA CAREFULLY *";
+	  gotoxy (15,15);
+	  cout<<"* EACH ENTERED RECORD CAN BE MODIFIED *";
+	  gotoxy (15,18);
+	  cout<<"* BOOKS LIST & MEMBERS LIST CAN BE VIEWED *";
+	  gotoxy (15,21);
+	  cout<<" * FOLLOW THE ON SCREEN INSTRUCTIONS *";
+	  gotoxy (2,24);
+	  cout<<"press any key to continue...";
+	  textcolor (WHITE);
+	  getch();
+	  break;
+
+	case '2':
+		WORKING W;
+		W.add_b();
+		break;
+
+	case'3':
+		   W.add_m();
+		   break;
+
+
+      case '4':
+
+		 W.issue_b();
+		   break;
+     case '5':
+
+	      W.return_b();
+		  break;
+	case'6':
+
+		BOOK B;
+	       B.table();
+	       break;
+	case'7':
+		MEMBER M;
+		M.jot();
+		break;
+	case'8':
+		ed_menu();
+		break;
+
+       case '9':clrscr();
+
+		gotoxy(50,25);
+		cout<<"\n\n\nTHIS MARKS THE END OF YOUR LIBRARY VISIT  !!!!";
+		cout<<"\n\n\nHOPE YOU ENJOYED THE VISIT";
+		cout<<"\n\n\n\nPress a key to continue ................";
+		getch();
+		clrscr();
+		cout<<"\n\n\n\nTHE PROJECT GIVES AN INSIGHT TO THE MANAGEMENT OF THE LIBRARY";
+		cout<<"\n\nAN EFFORT HAS BEEN MADE TO INCLUDE ALL BASIC LIBRARY FUNCTIONS";
+		cout<<"\n\n   WITHIN THE LIMITS OF KNOWLEDGE GAINED ";
+		getch();
+		clrscr();
+		cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n********************* PROJECT SUBMITTED TO **************************";
+		cout<<"\n\n\n                     Mr. MANOJ TIWARI                             ";
+		cout<<"\n\n\n\n\n\n******************** PROJECT SUBMITTED BY **************************";
+
+		cout<<"\n\n              NIDHI ARORA    - 1031482704  Group - C4             ";
+
+       }
+       }while(ch!='9');
+       getch();
+       }
+       //edit menu
+       void ed_menu()
+       {
+	char ch ;
+	do
+	{
+		clrscr() ;
+		gotoxy(32,9) ;
+		cout<<"E D I T  M E N U";
+		gotoxy(32,10) ;
+		cout<<"~~~~~~~~~~~~~~~~";
+		gotoxy(34,13) ;
+		cout<<"1. BOOKS";
+		gotoxy(34,14) ;
+		cout<<"2. MEMBERS";
+		gotoxy(34,15) ;
+		cout<<"0. EXIT";
+		gotoxy(31,17) ;
+		cout<<"ENTER YOUR CHOICE :";
+		ch = getche() ;
+		switch(ch)
+		{
+		case'1':
+			ed_book() ;
+			break;
+
+		case '2':
+			ed_member() ;
+			break;
+
+		}
+       }while(ch!='0');
+getch();
+}
+//edit books menu
+void  ed_book()
+{
+	char ch ;
+	do
+	{
+		clrscr() ;
+		gotoxy(31,9) ;
+		cout<<"E D I T  B O O K S";
+		gotoxy(31,10) ;
+		cout<<"~~~~~~~~~~~~~~~~~~";
+		gotoxy(34,13) ;
+		cout<<"1. MODIFY";
+		gotoxy(34,14) ;
+		cout<<"2. DELETE";
+		gotoxy(34,15) ;
+		cout<<"0. EXIT";
+		gotoxy(31,17);
+		cout <<"ENTER YOUR CHOICE : " ;
+		ch = getche() ;
+		switch(ch)
+		{
+		case '1':
+
+
+			WORKING W ;
+			W.modify_b() ;
+
+		case'2':
+
+			W.delete_b() ;
+		}
+
+	}while(ch!='0');
+}
+
+//edit books member
+void  ed_member()
+{
+	char ch ;
+	do
+	{
+		clrscr() ;
+		gotoxy(29,9) ;
+		cout <<"E D I T  M E M B E R S";
+		gotoxy(29,10) ;
+		cout <<"~~~~~~~~~~~~~~~~~~~~~~" ;
+		gotoxy(34,13) ;
+		cout <<"1. MODIFY" ;
+		gotoxy(34,14) ;
+		cout <<"2. DELETE" ;
+		gotoxy(34,15) ;
+		cout <<"0. EXIT" ;
+		gotoxy(29,17) ;
+		cout <<"ENTER YOUR CHOICE : " ;
+		ch = getche() ;
+		switch(ch)
+		{
+
+		case '1':
+
+			WORKING W ;
+			W.modify_m() ;
+
+		case '2':
+
+			W.delete_m() ;
+		}
+
+	} while(ch!='0');
+}
+
+// THIS FUNCTION RETURN 0 IF GIVEN BOOK CODE NOT FOUND
+
+int BOOK :: b_found(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int found=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			found = 1 ;
+			break ;
+		}
+	}
+	file.close() ;
+	return found ;
+}
+
+// THIS FUNCTION RETURN 0 IF GIVEN BOOK NAME NOT FOUND
+
+int BOOK :: b_name_found(char t1code[33])
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int found=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (!strcmpi(name,t1code))
+		{
+			found = 1 ;
+			break ;
+		}
+	}
+	file.close() ;
+	return found ;
+}
+
+// THIS FUNCTION RETURN RECORD NO. FOR THE BOOK CODE
+
+int BOOK :: recordno(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int count=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		count++ ;
+		if (bookcode == tcode)
+			break ;
+	}
+	file.close() ;
+	return count ;
+}
+
+// THIS FUNCTION RETURNS THE AVAILABLE COPIES FOR THE GIVEN
+// BOOK CODE.
+
+int BOOK :: available(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int tavail=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			tavail = avail ;
+			break ;
+		}
+	}
+	file.close() ;
+	return tavail ;
+}
+
+// THIS FUNCTION RETURNS THE NO. OF COPIES FOR THE GIVEN
+// BOOK CODE.
+
+int BOOK :: no_of_copies(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int tcopies=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			tcopies = copies ;
+			break ;
+		}
+	}
+	file.close() ;
+	return tcopies ;
+}
+
+// THIS FUNCTION RETURNS THE BOOK NAME OF THE GIVEN BOOK
+// CODE.
+
+char *BOOK :: b_name(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	char tname[33] ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			strcpy(tname,name) ;
+			break ;
+		}
+	}
+	file.close() ;
+	return tname ;
+}
+
+// THIS FUNCTION RETURNS THE AUTHOR NAME OF THE GIVEN BOOK
+// CODE.
+
+char *BOOK :: a_name(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	char tauthor[26] ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			strcpy(tauthor,author) ;
+			break ;
+		}
+	}
+	file.close() ;
+	return tauthor ;
+}
+
+// THIS FUNCTION RETURNS THE BOOK PRICE OF THE GIVEN BOOK
+// CODE.
+
+float BOOK :: b_price(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	float tprice=0.0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			tprice = price ;
+			break ;
+		}
+	}
+	file.close() ;
+	return tprice ;
+}
+
+// THIS FUNCTION RETURNS THE BOOK CODE OF THE GIVEN BOOK
+// NAME.
+
+int BOOK :: b_codeof(char t1code[33])
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int tcode=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (!strcmpi(name,t1code))
+		{
+			tcode = bookcode ;
+			break ;
+		}
+	}
+	file.close() ;
+	return tcode ;
+}
+
+// THIS FUNCTION RETURNS THE NO. OF THE RECORDS IN THE BOOK
+// FILE.
+
+int BOOK :: reccount()
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	int count=0 ;
+	while (file.read((char *) this, sizeof(BOOK)))
+		count++ ;
+	file.close() ;
+	return count ;
+}
+
+// THIS FUNCTION DELETES THE RECORD OF THE GIVEN BOOK CODE.
+
+void BOOK :: delete_rec(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	fstream temp ;
+	temp.open("temp.dat", ios::out) ;
+	file.seekg(0,ios::beg) ;
+	while ( !file.eof() )
+	{
+		file.read((char *) this, sizeof(BOOK)) ;
+		if ( file.eof() )
+			break ;
+		if ( bookcode != tcode )
+			temp.write((char *) this, sizeof(BOOK)) ;
+	}
+	file.close() ;
+	temp.close() ;
+	file.open("BOOK.DAT", ios::out) ;
+	temp.open("temp.dat", ios::in) ;
+	temp.seekg(0,ios::beg) ;
+	while(!temp.eof())
+	{
+		temp.read((char *) this, sizeof(BOOK)) ;
+		if ( temp.eof() )
+			break ;
+		file.write((char *) this, sizeof(BOOK)) ;
+	}
+	file.close() ;
+	temp.close() ;
+}
+
+// THIS FUNCTION ADD THE RECORD IN THE BOOK FILE
+
+void BOOK :: add_book(int tcode,char tname[33], char tauthor[26], float tprice, int tcopies, int tavail)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::app) ;
+	bookcode = tcode ;
+	strcpy(name,tname) ;
+	strcpy(author,tauthor) ;
+	price = tprice ;
+	copies = tcopies ;
+	avail = tavail ;
+	file.write((char *) this, sizeof(BOOK)) ;
+	file.close() ;
+}
+
+// THIS FUNCTION UPDATE THE RECORD IN THE BOOK FILE FOR THE
+// GIVEN BOOK CODE
+
+void BOOK :: update_copies(int tcode, int tcopies, int tavail)
+{
+	int recno ;
+	recno = recordno(tcode) ;
+	fstream file ;
+	file.open("BOOK.DAT", ios::out | ios::ate) ;
+	copies = tcopies ;
+	avail = tavail ;
+	int location ;
+	location = (recno-1) * sizeof(BOOK) ;
+	file.seekp(location) ;
+	file.write((char *) this, sizeof(BOOK)) ;
+	file.close() ;
+}
+
+// THIS FUNCTION MODIFY THE RECORD IN THE BOOK FILE FOR THE
+// GIVEN BOOK CODE
+
+void BOOK :: change(int tcode, char tname[33], char tauthor[26], float tprice)
+{
+	int recno ;
+	recno = recordno(tcode) ;
+	fstream file ;
+	file.open("BOOK.DAT", ios::out | ios::ate) ;
+	strcpy(name,tname) ;
+	strcpy(author,tauthor) ;
+	price = tprice ;
+	int location ;
+	location = (recno-1) * sizeof(BOOK) ;
+	file.seekp(location) ;
+	file.write((char *) this, sizeof(BOOK)) ;
+	file.close() ;
+}
+
+// THIS FUNCTION DISPLAY THE RECORD FROM THE BOOK FILE
+// FOR THE GIVEN BOOK CODE
+
+void BOOK :: display(int tcode)
+{
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		if (bookcode == tcode)
+		{
+			gotoxy(5,5) ;
+			cout <<"BOOK CODE   : " <<bookcode ;
+			gotoxy(5,7) ;
+			cout <<"BOOK NAME   : " <<name ;
+			gotoxy(5,8) ;
+			cout <<"AUTHOR NAME : " <<author ;
+			gotoxy(5,9) ;
+			cout <<"PRICE       : Rs." <<price ;
+			gotoxy(5,10) ;
+			cout <<"COPIES      : " <<copies ;
+			gotoxy(5,11) ;
+			cout <<"AVAILABLE   : " <<avail ;
+			break ;
+		}
+	}
+	file.close() ;
+}
+
+// THIS FUNCTION DISPLAY THE LIST OF BOOKS.
+
+void BOOK :: table()
+{
+	clrscr() ;
+	int row = 6 , found=0, flag=0 ;
+	char ch ;
+	gotoxy(33,2) ;
+	cout <<"LIST OF BOOKS" ;
+	gotoxy(32,3) ;
+	cout <<"~~~~~~~~~~~~~~~" ;
+	gotoxy(1,4) ;
+	cout <<"CODE  BOOK NAME                        AUTHOR                    PRICE  COPIES" ;
+	gotoxy(1,5) ;
+	cout <<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" ;
+	fstream file ;
+	file.open("BOOK.DAT", ios::in) ;
+	file.seekg(0,ios::beg) ;
+	while (file.read((char *) this, sizeof(BOOK)))
+	{
+		flag = 0 ;
+		delay(20) ;
+		found = 1 ;
+		gotoxy(2,row) ;
+		cout <<bookcode ;
+		gotoxy(7,row) ;
+		cout	<<name ;
+		gotoxy(40,row) ;
+		cout	<<author ;
+		gotoxy(66,row) ;
+		cout	<<price ;
+		gotoxy(73,row) ;
+		cout <<"1" ;
+		textbackground(WHITE) ; textcolor(BLACK) ;
+		gotoxy(40,row+1) ;
+		cout<<"STATUS: ";
+		textcolor(BLACK+BLINK) ;
+		cout<<"%d COPIES AVAILABLE ",avail ;
+		textbackground(BLACK) ; textcolor(LIGHTGRAY) ;
+		if ( row == 22 )
+		{
+			flag = 1 ;
+			row = 6 ;
+			gotoxy(1,25) ;
+			cout <<"PRESS ANY KEY TO CONTINUE OR PRESS <ESC> TO EXIT " ;
+			ch = getch() ;
+			if (ch == 27)
+				break ;
+			clrscr() ;
+			gotoxy(33,2) ;
+			cout <<"LIST OF BOOKS" ;
+			gotoxy(32,3) ;
+			cout <<"~~~~~~~~~~~~~~~" ;
+			gotoxy(1,4) ;
+			cout <<"CODE  BOOK NAME                        AUTHOR                    PRICE  COPIES" ;
+			gotoxy(1,5) ;
+cout <<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" ;
+		}
+		else
+			row = row + 2 ;
+	}
+	if (!found)
+	{
+		gotoxy(5,10) ;
+		cout <<"\7RECORDS NOT FOUND " ;
+	}
+	if (!flag)
+	{
+		gotoxy(1,25) ;
+		cout <<"PRESS ANY KEY TO CONTINUE..." ;
+		getche() ;
+	}
+	file.close () ;
+}
+//this function return 0 if given member code  not found
+int MEMBER::m_found(int mcode)
+{
+	fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	int found=0;
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		if(memcode==mcode)
+		{
+		found=1;
+		break;
+		}
+	}
+	file.close();
+	return   found;
+}
+//this function return 0 if member have not issued any book
+int MEMBER::issued(int mcode)
+{
+	fstream file ;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	int missue=0;
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		if(memcode==mcode)
+		{ missue=bookcode;break;
+		}
+	}
+	file.close();
+	return missue;
+}
+//this function return last code of member file
+int MEMBER::ltcode()
+{
+	fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	int mcode=0;
+	while(file.read((char*)this,sizeof(MEMBER)))
+
+		mcode=memcode;
+	file.close();
+	return mcode;
+}
+//this function return member name of given member code
+char*MEMBER::m_name(int mcode)
+{
+	fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	char mname[26];
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		if(memcode==mcode)
+		{
+			strcpy(mname,name);
+		}
+	}
+	file.close();
+	return mname;
+}
+
+//this function return member phone of given member
+char*MEMBER::m_phone(int mcode)
+{       fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	char mphone[10];
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		if(memcode==mcode)
+		{
+			strcpy(mphone,phone);break;
+		}
+	}
+	file.close();
+	return mphone;
+}
+//this function return member address of given member
+char*MEMBER::m_address(int mcode)
+{
+	fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	char maddress[33];
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		if(memcode==mcode)
+		{
+			strcpy(maddress,maddress);
+		}
+	}
+	file.close();
+	return maddress;
+}
+//this function return record no of given member  code
+int MEMBER::recordno(int mcode)
+{
+	     fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	int count=0;
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		count++;
+		if(memcode==mcode)
+		break;
+	}
+	file.close();
+	return count;
+}
+
+//this function delete record for given member code
+void MEMBER::del_rec(int mcode)
+{
+	     fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	fstream temp;
+	temp.open("TEMP.DAT",ios::out) ;
+	file.seekg(0,ios::beg);
+	while(!file.eof())
+	{
+		file.read((char*)this,sizeof(MEMBER));
+		if(file.eof())break;
+		if(memcode!=mcode)
+		temp.write((char*)this,sizeof(MEMBER));
+	}
+	file.close();
+	temp.close();
+	file.open("MEMBER.DAT",ios::out);
+	temp.open("TEMP.DAT",ios::in);
+	temp.seekg(0,ios::beg);
+	while(!temp.eof())
+	{
+		temp.read((char*)this,sizeof(MEMBER));
+		if(temp.eof())break;
+		file.write((char*)this,sizeof(MEMBER));
+	}
+	file.close();
+	temp.close();
+
+}
+//this function will update record for given member code
+
+void MEMBER::update_b(int mcode,int tcode)
+{
+	     fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	fstream temp;
+	temp.open("TEMP.DAT",ios::out);
+		file.seekg(0,ios::beg);
+	 while(!file.eof())
+	 {
+		file.read((char*)this,sizeof(MEMBER));
+		if(file.eof())break;
+		if(memcode==mcode)
+		{
+			bookcode=tcode;
+			temp.write((char*)this,sizeof(MEMBER));
+		}
+		else
+			temp.write((char*)this,sizeof(MEMBER));
+	 }
+	 file.close();
+	 temp.close();
+	 file.open("MEMBER.DAT",ios::out);
+	 temp.open("TEMP.DAT",ios::in)    ;
+	 temp.seekg(0,ios::beg);
+	 while(!temp.eof())
+	 {
+		temp.read((char*)this,sizeof(MEMBER));
+		if(temp.eof())break;
+		file.write((char*)this,sizeof(MEMBER));
+	 }
+	 file.close();
+	 temp.close();
+}
+
+//this function modify record for given member code
+void MEMBER::mod(int mcode,char mname[26],char mphone[10],char maddress[33])
+{
+	int recno;
+	recno=recordno(mcode);
+	     fstream file;
+	file.open("MEMBER.DAT",ios::out|ios::ate);
+	strcpy(name,mname);
+	strcpy(phone,mphone);
+	strcpy(address,maddress);
+	int location;
+	location=(recno-1)*sizeof(MEMBER);
+	file.seekp(location);
+	file.write((char*)this,sizeof(MEMBER));
+	file.close();
+}
+//this function add record in file for given member code
+void MEMBER::add_mem(int mcode,int bcode,char mname[26],char maddress[33],char mphone[10])
+{
+     fstream file;
+	file.open("MEMBER.DAT",ios::app);
+	memcode=mcode;
+	bookcode=bcode;
+	strcpy(name,mname);
+	strcpy(phone,mphone);
+	strcpy(address,maddress);
+	file.write((char*)this,sizeof(MEMBER));
+	file.close();
+     }
+
+//this function display record for given member code
+void MEMBER::display(int mcode)
+{
+	     fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		if(memcode==mcode)
+		{
+			gotoxy(5,3);
+			cout<<"MEMBER CODE"<<mcode;
+			gotoxy(5,4);
+			cout<<"~~~~~~~~~~~~~";
+			gotoxy(5,6);
+			cout<<"NAME:"<<name;
+			gotoxy(5,7);
+			cout<<"PHONE: "<<phone;
+			gotoxy(5,8);
+			cout<<"ADDRESS:"<<address;
+			break;
+		}
+	}
+	file.close();
+}
+
+
+//list of members
+void MEMBER::jot()
+{
+	clrscr();
+	BOOK B;
+	int row =6,found=0,flag=0;
+	char ch;
+	gotoxy(32,2);
+	cout<<"LIST OF MEMBERS";
+	gotoxy(31,3);
+	cout<<"~~~~~~~~~~~~~~~~~";
+	gotoxy(1,4);
+	cout<<"MEMBER CODE 	 BOOK CODE 		      NAME             	  PHONE";
+	gotoxy(1,5);
+	cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+	     fstream file;
+	file.open("MEMBER.DAT",ios::in);
+	file.seekg(0,ios::beg);
+	while(file.read((char*)this,sizeof(MEMBER)))
+	{
+		flag=0;
+		delay(20);
+		found=1;
+		gotoxy(3,row);
+		cout<<"memcode";
+		gotoxy(20,row);
+		cout<<"bookcode";
+		gotoxy(41,row);
+		cout<<"name";
+		gotoxy(65,row);
+		cout<<"phone";
+		textbackground(WHITE);
+		textcolor(BLACK);
+		gotoxy(7,row+1);
+		if(bookcode==0)
+			cout<<"BOOK NAME:(NOT ISSUED)";
+	 else
+		{
+		cout<<"BOOK NAME: %s",B.b_name(bookcode);
+	       }
+		textbackground(BLACK);textcolor(LIGHTGRAY);
+		if(row==2)
+		{
+			flag=1;
+			row=6;
+			gotoxy(1,25);
+			cout<<"PRESS ANY KEY TO CONTUNUE";
+
+			ch=getch();
+			if(ch==27)break;
+			clrscr();
+			gotoxy(32,2);cout<<"LIST OF MEMBERS";
+			gotoxy(31,3);cout<<"~~~~~~~~~~~~~~~";
+			gotoxy(1,4);cout<<"MEMBER CODE  	BOOK CODE  		NAME		PHONE";
+			gotoxy(1,5);cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+		}
+		else
+		row=row+2;
+		}
+		if(!found)
+		{
+		gotoxy(5,10);
+		cout<<"\7RECORDS NOT FOUND";
+		}
+		if(!flag)
+		{
+		gotoxy(1,25);
+		cout<<"PRESS ANY KEY TO CONTINUE...";
+		getche();
+		}
+		file.close();
+		}
+
+// THIS FUNCTION GIVES DATA TO ADD RECORD IN THE BOOK FILE.
+
+void WORKING :: add_b()
+{
+	if (!reccount())  // MEMBER FUNCTION OF BOOK
+	{
+		add_book(0,"null","null",0.0,0,0) ;
+		BOOK::delete_rec(0) ;
+	}
+	char ch ;
+	int tcode, tavail ;
+	 int tcopies;
+	char tname[33], tauthor[26] ;
+	float tprice=0.0 ;
+	do
+	{
+		int found=0, valid=0 ;
+		int tc ;
+		float t2=0.0 ;
+	     char t[10];
+	    char t1[10] ;
+		clrscr() ;
+		gotoxy(29,3) ;
+		cout <<"ADDITION OF THE BOOKS" ;
+		gotoxy(29,4) ;
+		cout <<"~~~~~~~~~~~~~~~~~~~~~" ;
+		gotoxy(72,1) ;
+		cout <<"<0>=Exit" ;
+		gotoxy(5,25) ;
+		cout <<"ENTER CODE NO. OF THE BOOK" ;
+		gotoxy(5,5) ;
+		cout <<"CODE NO. " ;
+		gets(t) ;
+		tc = atoi(t) ;
+		tcode = tc ;
+		if (tcode == 0)
+			return ;
+		if (b_found(tcode))
+		{
+
+			cout<<"\n"<<"RECORD ALRADY EXSISTS";
+			getch();
+				break;
+				}
+		gotoxy(5,8) ;
+		cout <<"BOOK NAME   : " ;
+		gotoxy(5,9) ;
+		cout <<"AUTHOR NAME : " ;
+		gotoxy(5,10) ;
+		cout <<"PRICE       : Rs." ;
+		gotoxy(5,12) ;
+		valid = 0 ;
+		while (!valid && !found)
+		{
+			valid = 1 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"ENTER THE NAME OF THE BOOK" ;
+			gotoxy(19,8) ; clreol() ;
+			gets(tname) ;
+			strupr(tname) ;
+			if (tname[0] == '0')
+				return ;
+			if (strlen(tname) < 1 || strlen(tname) > 32)
+			{
+				valid = 0 ;
+				gotoxy(5,25) ; clreol() ;
+				cout <<"\7ENTER CORRECTLY (RANGE: 1..32)" ;
+				getch() ;
+			}
+		}
+		valid = 0 ;
+		while (!valid && !found)
+		{
+			valid = 1 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"ENTER THE AUTHOR'S NAME THE BOOK" ;
+			gotoxy(19,9) ; clreol() ;
+			gets(tauthor) ;
+			strupr(tauthor) ;
+			if (tauthor[0] == '0')
+				return ;
+			if (strlen(tauthor) < 1 || strlen(tauthor) > 25)
+			{
+				valid = 0 ;
+				gotoxy(5,25) ; clreol() ;
+				cout <<"\7ENTER CORRECTLY (RANGE: 1..25)" ;
+				getch() ;
+			}
+		}
+		valid = 0 ;
+		while (!valid && !found)
+		{
+			valid = 1 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"ENTER THE PRICE OF THE BOOK" ;
+			gotoxy(22,10) ; clreol() ;
+			gets(t1) ;
+			t2 = atof(t1) ;
+			tprice = t2 ;
+			if (t1[0] == '0')
+				return ;
+			if (tprice < 1 || tprice > 9999)
+			{
+				valid = 0 ;
+				gotoxy(5,25) ; clreol() ;
+				cout <<"\7ENTER CORRECTLY" ;
+				getch() ;
+			}
+		}
+		tcopies = 1 ;
+		tavail = available(tcode) + tcopies ;
+		tcopies = no_of_copies(tcode) + tcopies ;
+		gotoxy(5,25) ; clreol() ;
+		do
+		{
+			gotoxy(5,15) ; clreol() ;
+			cout <<"DO YOU WANT TO SAVE (Y/N) : " ;
+			ch = getche() ;
+			ch = toupper(ch) ;
+		} while (ch != 'Y' && ch != 'N') ;
+
+		if (ch == 'Y')
+		{
+			if (found)
+				update_copies(tcode,tcopies,tavail) ;
+			else
+				add_book(tcode,tname,tauthor,tprice,tcopies,tavail) ;
+		}
+		do
+		{
+			gotoxy(5,17) ; clreol() ;
+			cout <<"DO YOU WANT TO ADD MORE (Y/N) : " ;
+			ch = getche() ;
+			ch = toupper(ch) ;
+		} while (ch != 'Y' && ch != 'N') ;
+	} while (ch == 'Y') ;
+}
+
+// THIS FUNCTION `GIVES DATA TO ADD RECORD IN THE MEMBER FILE
+
+void WORKING :: add_m()
+{
+	char ch ;
+	int mcode, bcode ;
+	char mname[26], mphone[10], maddress[33] ;
+	mcode = ltcode() ;
+	mcode++ ;
+	do
+	{
+		int valid=0 ;
+		clrscr() ;
+		gotoxy(28,3) ;
+		cout <<"ADDITION OF THE MEMBERS" ;
+		gotoxy(28,4) ;
+		cout <<"~~~~~~~~~~~~~~~~~~~~~~~" ;
+		gotoxy(72,1) ;
+		cout <<"<0>=Exit" ;
+		gotoxy(5,7) ;
+		cout <<"MEMBER CODE # " <<mcode ;
+		gotoxy(5,8) ;
+		cout <<"~~~~~~~~~~~~~~~~~" ;
+		gotoxy(5,10) ;
+		cout <<"NAME    : " ;
+		gotoxy(5,12) ;
+		cout <<"PHONE   : " ;
+		gotoxy(5,14) ;
+		cout <<"ADDRESS : " ;
+		do
+		{
+			valid = 1 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"ENTER THE NAME OF THE NEW MEMBER" ;
+			gotoxy(15,10) ; clreol() ;
+			gets(mname) ;
+			strupr(mname) ;
+			if (mname[0] == '0')
+				return ;
+			if (strlen(mname) < 1 || strlen(mname) > 25)
+			{
+				valid = 0 ;
+				gotoxy(5,25) ; clreol() ;
+				cout <<"\7ENTER CORRECTLY (RANGE: 1..25)" ;
+				getch() ;
+			}
+		} while (!valid) ;
+		do
+		{
+			valid = 1 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"ENTER PHONE NO. OF  THE MEMBER OR PRESS <ENTER> FOR NONE" ;
+			gotoxy(15,12) ; clreol() ;
+			gets(mphone) ;
+			if (mphone[0] == '0')
+				return ;
+			if ((strlen(mphone) < 7 && strlen(mphone) > 0) || (strlen(mphone) > 9))
+			{
+				valid = 0 ;
+				gotoxy(5,25) ; clreol() ;
+				cout <<"\7ENTER CORRECTLY" ;
+				getch() ;
+			}
+		} while (!valid) ;
+		if (strlen(mphone) == 0)
+			strcpy(mphone,"-") ;
+		do
+		{
+			valid = 1 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"ENTER THE ADDRESS OF THE NEW MEMBER" ;
+			gotoxy(15,14) ; clreol() ;
+			gets(maddress) ;
+			strupr(maddress) ;
+			if (maddress[0] == '0')
+				return ;
+			if (strlen(maddress) < 1 || strlen(maddress) > 32)
+			{
+				valid = 0 ;
+				gotoxy(5,25) ; clreol() ;
+				cout <<"\7ENTER CORRECTLY (RANGE: 1..32)" ;
+				getch() ;
+			}
+		} while (!valid) ;
+		gotoxy(5,25) ; clreol() ;
+		do
+		{
+			gotoxy(5,17) ; clreol() ;
+			cout <<"DO YOU WANT TO SAVE (Y/N) : " ;
+			ch = getche() ;
+			ch = toupper(ch) ;
+			if (ch == '0')
+				return ;
+		} while (ch != 'Y' && ch != 'N') ;
+		if (ch == 'Y')
+		{
+			bcode = 0 ;
+			add_mem(mcode,bcode,mname,maddress,mphone) ;
+			mcode++ ;
+		}
+		do
+		{
+			gotoxy(5,19) ; clreol() ;
+			cout <<"DO YOU WANT TO ADD MORE (Y/N) : " ;
+			ch = getche() ;
+			ch = toupper(ch) ;
+			if (ch == '0')
+				return ;
+		} while (ch != 'Y' && ch != 'N') ;
+	} while (ch == 'Y') ;
+}
+
+// THIS FUNCTION ISSUES THE BOOK
+
+void WORKING :: issue_b()
+{
+	BOOK B ;
+	MEMBER M ;
+	char t1code[33], ch ;
+	int t2code=0, tcode=0, mcode=0 ;
+	int valid ;
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=EXIT" ;
+			gotoxy(5,5) ;
+			cout <<"ENTER CODE OR NAME OF THE BOOK TO BE ISSUED " ;
+			gotoxy(5,6) ;
+			cout <<"                  OR                       " ;
+			gotoxy(5,7) ;
+			cout <<"PRESS  <ENTER> FOR HELP  " ;
+			gets(t1code) ;
+			if (t1code[0] == '0')
+				return ;
+			if (strlen(t1code) == 0)
+				B.table() ;
+			else
+				break ;
+		}
+		t2code = atoi(t1code) ;
+		tcode = t2code ;
+if ((tcode == 0 && !b_name_found(t1code)) || (tcode != 0 && !b_found(tcode)))
+		{
+			valid = 0 ;
+			gotoxy(5,10) ;
+			cout <<"\7RECORD NOT FOUND" ;
+			gotoxy(5,11) ;
+		cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE..." ;
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+	} while (!valid) ;
+	if (tcode == 0)
+		tcode = b_codeof(t1code) ;
+	if (!available(tcode))
+	{
+		gotoxy(5,10) ;
+		cout <<"\7SORRY! BOOK (" <<b_name(tcode) <<") IS NOT AVAILABLE" ;
+		gotoxy(5,11) ;
+		cout <<"KINDLY ISSUE ANY OTHER BOOK" ;
+		gotoxy(5,12) ;
+		cout <<"SEE LIST OF BOOKS" ;
+		getch() ;
+		return ;
+	}
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=EXIT" ;
+			gotoxy(5,2) ;
+		      gotoxy(5,5) ;
+			cout <<"BOOK NAME: " <<b_name(tcode) ;
+			gotoxy(5,7) ;
+			cout <<"ENTER CODE NO. OF THE MEMBER" ;
+			gotoxy(5,8) ;
+			cout <<"            OR              " ;
+			gotoxy(5,9) ;
+			cout <<"PRESS <ENTER> FOR HELP " ;
+			gets(t1code) ;
+			if (t1code[0] == '0')
+				return ;
+			if (strlen(t1code) == 0)
+				M.jot() ;
+			else
+				break ;
+		}
+		t2code = atoi(t1code) ;
+		mcode = t2code ;
+		if (mcode == 0)
+		{       valid = 0 ;
+			gotoxy(5,25) ;
+			cout <<"\7ENTER CORRECTLY" ;
+			getch() ;
+		}
+		if (!m_found(mcode) && valid)
+		{
+			valid = 0 ;
+			gotoxy(5,13) ;
+			cout <<"\7RECORD NOT FOUND" ;
+		gotoxy(5,14) ;
+	cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE..." ;
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+		if (issued(mcode))
+	      {
+		gotoxy(5,15) ;
+	cout <<"\7YOU ALREADY HAVE A BOOK ,U CANNOT ISSUE ANOTHER BOOK" ;
+		getch() ;
+		return ;
+	       }
+
+
+
+	} while (!valid) ;
+	int tcopies, tavail ;
+	tcopies = no_of_copies(tcode) ;  // member function of BOOK
+	tavail  = available(tcode) - 1 ;  // member function of BOOK
+	update_copies(tcode,tcopies,tavail) ;  // member function of BOOK
+	update_b(mcode,tcode) ;  // member function of MEMBER
+	gotoxy(5,13) ;
+	cout <<"\7BOOK IS ISSUED TO :" <<m_name(mcode) ;
+    getch() ;
+}
+
+// THIS FUNCTION RETURNS THE BOOK FOR THE MEMBER
+
+void WORKING :: return_b()
+{
+	MEMBER M ;
+	char t1code[5], ch ;
+	int t2code=0, mcode=0, valid ;
+	int d1, m1, y1 ;
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=EXIT" ;
+			gotoxy(5,7) ;
+			cout <<"ENTER CODE NO. OF MEMBER WHO WANTS TO RETURN THE BOOK" ;
+			gotoxy(5,8) ;
+			cout <<"                        OR              " ;
+			gotoxy(5,9) ;
+			cout <<"PRESS <ENTER> FOR HELP  " ;
+			gets(t1code) ;
+			if (t1code[0] == '0')
+				return ;
+			if (strlen(t1code) == 0)
+				M.jot() ;
+			else
+				break ;
+		}
+		t2code = atoi(t1code) ;
+		mcode = t2code ;
+		if (mcode == 0)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ;
+			cout <<"\7ENTER CORRECTLY" ;
+			getch() ;
+		}
+		if (!m_found(mcode) && valid)
+		{
+			valid = 0 ;
+			gotoxy(5,13) ;
+			cout <<"\7RECORD NOT FOUND" ;
+			gotoxy(5,14) ;
+			cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE..." ;
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+		if (!issued(mcode) && valid)
+		{
+			valid = 0 ;
+			gotoxy(5,13) ;
+			cout <<"\7MEMBER HAVE NO BOOK TO RETURN" ;
+			gotoxy(5,14) ;
+			cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE...";
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+	} while (!valid) ;
+	int bcode, tcopies, tavail ;
+	bcode = issued(mcode) ;
+	gotoxy(5,13) ;
+	cout <<"BOOK CODE : " <<bcode ;
+	gotoxy(5,14) ;
+	cout <<"BOOK NAME : " <<b_name(bcode) ;
+	tcopies = no_of_copies(bcode) ;
+	tavail = available(bcode) + 1 ;
+	update_copies(bcode,tcopies,tavail) ;
+	update_b(mcode,0) ;
+	gotoxy(5,19) ;
+	cout <<"\7BOOK HAS BEEN RETURNED" ;
+	getch() ;
+}
+
+// THIS FUNCTION GIVES DATA TO MODIFY THE BOOK RECORD
+
+void WORKING :: modify_b()
+{
+	BOOK B ;
+	char t1code[5], tname[33], tauthor[26], *t1, ch ;
+	int t2code=0, tcode=0 ;
+	float t2=0.0, tprice=0.0 ;
+	int valid ;
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=Exit" ;
+			gotoxy(5,5) ;
+			cout <<"ENTER CODE OR NAME OF THE BOOK TO BE MODIFIED " ;
+			gotoxy(5,6) ;
+			cout <<"                  OR                       " ;
+			gotoxy(5,7) ;
+			cout <<"PRESS <ENTER> FOR HELP  " ;
+			gets(t1code) ;
+			if (t1code[0] == '0')
+				return ;
+			if (strlen(t1code) == 0)
+				B.table() ;
+			else
+				break ;
+		}
+		t2code = atoi(t1code) ;
+		tcode = t2code ;
+		if ((tcode == 0 && !b_name_found(t1code)) || (tcode != 0 && !b_found(tcode)))
+		{
+			valid = 0 ;
+			gotoxy(5,10) ;
+			cout <<"\7RECORD NOT FOUND" ;
+			gotoxy(5,11) ;
+			cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE...";
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+	} while (!valid) ;
+	if (tcode == 0)
+		tcode = b_codeof(t1code) ;
+	clrscr() ;
+	gotoxy(72,1) ;
+	cout <<"<0>=EXIT" ;
+	BOOK::display(tcode) ;
+	do
+	{
+		gotoxy(5,13) ; clreol() ;
+		cout <<"DO YOU WANT TO MODIFY THIS RECORD  (Y/N) : " ;
+		ch = getche() ;
+		ch = toupper(ch) ;
+		if (ch == '0')
+			return ;
+	} while (ch != 'Y' && ch != 'N') ;
+	if (ch == 'N')
+		return ;
+	gotoxy(5,16) ;
+	cout <<"BOOK NAME   : " ;
+	gotoxy(5,17) ;
+	cout <<"AUTHOR NAME : " ;
+	gotoxy(5,18) ;
+	cout <<"PRICE        : RS." ;
+	do
+	{
+		valid = 1 ;
+		gotoxy(5,25) ; clreol() ;
+		cout <<"ENTER THE NAME OF THE BOOK OR <ENTER> FOR NO CHANGE" ;
+		gotoxy(19,16) ; clreol() ;
+		gets(tname) ;
+		strupr(tname) ;
+		if (tname[0] == '0')
+			return ;
+		if (strlen(tname) > 32)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"\7ENTER CORRECTLY (RANGE: 1..32)" ;
+			getch() ;
+		}
+	} while (!valid) ;
+	if (strlen(tname) == 0)
+		strcpy(tname,b_name(tcode)) ;
+	do
+	{
+		valid = 1 ;
+		gotoxy(5,25) ; clreol() ;
+		cout <<"ENTER AUTHOR'S NAME OR <ENTER> FOR NO CHANGE" ;
+		gotoxy(19,17) ; clreol() ;
+		gets(tauthor) ;
+		strupr(tauthor) ;
+		if (tauthor[0] == '0')
+			return ;
+		if (strlen(tauthor) > 25)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"\7ENTER CORRECTLY (RANGE: 1..25)" ;
+			getch() ;
+		}
+	} while (!valid) ;
+	if (strlen(tauthor) == 0)
+		strcpy(tauthor,a_name(tcode)) ;
+	do
+	{
+		valid = 1 ;
+		gotoxy(5,25) ; clreol() ;
+		cout <<"ENTER PRICE OR <ENTER> FOR NO CHANGE" ;
+		gotoxy(22,18) ; clreol() ;
+		gets(t1) ;
+		t2 = atof(t1) ;
+		tprice = t2 ;
+		if (t1[0] == '0')
+			return ;
+		if (strlen(t1) == 0)
+			break ;
+		if (tprice < 1 || tprice > 9999)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"\7ENTER CORRECTLY" ;
+			getch() ;
+		}
+	} while (!valid) ;
+	if (strlen(t1) == 0)
+		tprice = b_price(tcode) ;
+	gotoxy(5,25) ; clreol() ;
+	do
+	{
+		gotoxy(5,20) ; clreol() ;
+		cout <<"DO YOU WANT TO SAVE THE CHANGES (Y/N) : " ;
+		ch = getche() ;
+		ch = toupper(ch) ;
+		if (ch == '0')
+			return ;
+	} while (ch != 'Y' && ch != 'N') ;
+	if (ch == 'N')
+		return ;
+	BOOK::change(tcode,tname,tauthor,tprice) ;
+	gotoxy(5,23) ;
+	cout <<"\7RECORD MODIFIED" ;
+	getch() ;
+}
+
+// THIS FUNCTION GIVES DATA TO MODIFY THE MEMBER RECORD
+
+void WORKING :: modify_m()
+{
+	MEMBER M ;
+	char m1code[10], mname[26], mphone[10], maddress[33], ch ;
+	int m2code=0, mcode=0 ;
+	int valid ;
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=EXIT" ;
+			gotoxy(5,7) ;
+			cout <<"ENTER CODE NO. OF THE MEMBER TO BE MODIFIED" ;
+			gotoxy(5,8) ;
+			cout <<"                        OR              " ;
+			gotoxy(5,9) ;
+			cout <<"PRESS <ENTER> FOR HELP  " ;
+			gets(m1code) ;
+			m2code = atoi(m1code) ;
+			mcode = m2code ;
+			if (m1code[0] == '0')
+				return ;
+			if (strlen(m1code) == 0)
+				M.jot() ;
+			else
+				break ;
+		}
+		if (mcode == 0)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ;
+			cout <<"\7ENTER CORRECTLY" ;
+			getch() ;
+		}
+		if (valid && !m_found(mcode))
+		{
+			valid = 0 ;
+			gotoxy(5,13) ;
+			cout <<"\7RECORD NOT FOUND" ;
+			gotoxy(5,14) ;
+			cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE...";
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+	} while (!valid) ;
+	clrscr() ;
+	gotoxy(72,1) ;
+	cout <<"<0>=EXIT" ;
+	MEMBER::display(mcode) ;
+	do
+	{
+		gotoxy(5,10) ; clreol() ;
+		cout <<"DO YOU WANT TO MODIFY THIS RECORD (Y/N) : " ;
+		ch = getche() ;
+		ch = toupper(ch) ;
+		if (ch == '0')
+			return ;
+	} while (ch != 'Y' && ch != 'N') ;
+	if (ch == 'N')
+		return ;
+	gotoxy(5,13) ;
+	cout <<"NAME    : " ;
+	gotoxy(5,14) ;
+	cout <<"PHONE   : " ;
+	gotoxy(5,15) ;
+	cout <<"ADDRESS : " ;
+	do
+	{
+		valid = 1 ;
+		gotoxy(5,25) ; clreol() ;
+		cout <<"ENTER THE NAME OF MEMBER OR <ENTER> FOR NO CHANGE" ;
+		gotoxy(19,13) ; clreol() ;
+		gets(mname) ;
+		strupr(mname) ;
+		if (mname[0] == '0')
+			return ;
+		if (strlen(mname) > 25)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"\7ENTER CORRECTLY (RANGE: 1..25)" ;
+			getch() ;
+		}
+	} while (!valid) ;
+	if (strlen(mname) == 0)
+		strcpy(mname,m_name(mcode)) ;
+	do
+	{
+		valid = 1 ;
+		gotoxy(5,25) ; clreol() ;
+		cout <<"ENTER THE PHONE NO.OF MEMBER OR <ENTER> FOR NO CHANGE" ;
+		gotoxy(19,14) ; clreol() ;
+		gets(mphone) ;
+		if (mphone[0] == '0')
+			return ;
+		if ((strlen(mphone) < 7 && strlen(mphone) > 0) || (strlen(mphone) > 9))
+		{
+			valid = 0 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"\7ENTER CORRECTLY" ;
+			getch() ;
+		}
+	} while (!valid) ;
+	if (strlen(mphone) == 0)
+		strcpy(mphone,m_phone(mcode)) ;
+	do
+	{
+		valid = 1 ;
+		gotoxy(5,25) ; clreol() ;
+		cout <<"ENTER THE ADDRESS OF THE MEMBER OR <ENTER> FOR NO CHANGE" ;
+		gotoxy(19,15) ; clreol() ;
+		gets(maddress) ;
+		strupr(maddress) ;
+		if (maddress[0] == '0')
+			return ;
+		if (strlen(maddress) > 32)
+		{
+			valid = 0 ;
+			gotoxy(5,25) ; clreol() ;
+			cout <<"\7ENTER CORRECTLY (RANGE: 1..32)" ;
+			getch() ;
+		}
+	} while (!valid) ;
+	if (strlen(maddress) == 0)
+		strcpy(maddress,m_address(mcode)) ;
+	gotoxy(5,25) ; clreol() ;
+	do
+	{
+		gotoxy(5,18) ; clreol() ;
+		cout <<"DO YOU WANT TO SAVE CHANGES (Y/N) : " ;
+		ch = getche() ;
+		ch = toupper(ch) ;
+		if (ch == '0')
+			return ;
+	} while (ch != 'Y' && ch != 'N') ;
+	if (ch == 'N')
+		return ;
+	MEMBER::mod(mcode,mname,mphone,maddress) ;
+	gotoxy(5,23) ;
+	cout <<"\7RECORD MODIFIED" ;
+	getch() ;
+}
+
+// THIS FUNCTION GIVES BOOK CODE TO DELETE THE BOOK RECORD
+
+void WORKING :: delete_b()
+{
+	BOOK B ;
+	char t1code[5], tname[33], tauthor[26], ch ;
+	int t2code=0, tcode=0 ;
+	int valid ;
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=EXIT" ;
+			gotoxy(5,5) ;
+			cout <<"ENTER CODE OR NAME OF BOOK TO BE DELETED" ;
+			gotoxy(5,6) ;
+			cout <<"                  OR                       " ;
+			gotoxy(5,7) ;
+			cout <<"PRESS <ENTER> FOR HELP  " ;
+			gets(t1code) ;
+			if (t1code[0] == '0')
+				return ;
+			if (strlen(t1code) == 0)
+				B.table() ;
+			else
+				break ;
+		}
+		t2code = atoi(t1code) ;
+		tcode = t2code ;
+		if ((tcode == 0 && !b_name_found(t1code)) || (tcode != 0 && !b_found(tcode)))
+		{
+			valid = 0 ;
+			gotoxy(5,10) ;
+			cout <<"\7RECORD NOT FOUND" ;
+			gotoxy(5,11) ;
+			cout <<"PRESS <ESC> TO EXIT OR ANY OTHER KEY TO CONTINUE...";
+			ch = getch() ;
+			if (ch == 27)
+				return ;
+		}
+	} while (!valid) ;
+	if (tcode == 0)
+		tcode = b_codeof(t1code) ;
+	clrscr() ;
+	gotoxy(72,1) ;
+	cout <<"<0>=EXIT" ;
+	BOOK::display(tcode) ;
+	do
+	{
+		gotoxy(5,13) ; clreol() ;
+		cout <<"DO YOU WANT TO DELETE THIS RECORD (Y/N) : " ;
+		ch = getche() ;
+		ch = toupper(ch) ;
+		if (ch == '0')
+			return ;
+	} while (ch != 'Y' && ch != 'N') ;
+	if (ch == 'N')
+		return ;
+	int tavail, tcopies ;
+	tavail = available(tcode) ;
+	tcopies = no_of_copies(tcode) ;
+	if (tavail != tcopies)
+	{
+		gotoxy(5,15) ;
+		cout <<"\7RECORD CANNOT BE DELETED. THIS BOOK IS ISSUED." ;
+		getch() ;
+		return ;
+	}
+	BOOK::delete_rec(tcode) ;
+	gotoxy(5,23) ;
+	cout <<"\7RECORD  DELETED" ;
+	getch() ;
+}
+
+// THIS FUNCTION GIVES MEMBER CODE TO DELETE THE MEMBER
+// RECORD
+
+void WORKING :: delete_m()
+{
+	MEMBER M ;
+	char m1code[5], mname[26], mphone[10], maddress[33], ch ;
+	int m2code=0, mcode=0 ;
+	int valid ;
+	do
+	{
+		valid = 1 ;
+		while (1)
+		{
+			clrscr() ;
+			gotoxy(72,1) ;
+			cout <<"<0>=EXIT" ;
+			gotoxy(5,7) ;
+			cout <<"ENTER CODE NO. OF THE MEMBER TO BE DELETED" ;
+			gotoxy(5,8) ;
+			cout <<"                       OR               " ;
+			gotoxy(5,9) ;
+			cout <<"PRESS <ENTER> FOR HELP  " ;
+			gets(m1code) ;
+			m2code = atoi(m1code) ;
+			mcode = m2code ;
+			if (m1code[0] == '0')
+				return ;
+			if (strlen(m1code) == 0)
+				M.jot() ;
+			else
+				break ;
+		}
+		if (mcode == 0)
+		{
+		valid = 0 ;
+		gotoxy(5,25) ;
+		cout <<"\7ENTER CORRECTLY" ;
+		getch() ;
+		}
+		if (valid && !m_found(mcode))
+		{
+		valid = 0 ;
+		gotoxy(5,13) ;
+		cout <<"\7RECORD NOT FOUND" ;
+		gotoxy(5,14) ;
+		cout <<"Press <ESC> to exit or any other key to continue..." ;
+		ch = getch() ;
+		if (ch == 27)
+		return ;
+		}
+	} while (!valid) ;
+	clrscr() ;
+	gotoxy(72,1) ;
+	cout <<"<0>=EXIT" ;
+	MEMBER::display(mcode) ;
+	do
+	{
+		gotoxy(5,10) ; clreol() ;
+		cout <<"DO YOU WANT TO DELETE THIS RECORD (Y/N) : " ;
+		ch = getche() ;
+		ch = toupper(ch) ;
+		if (ch == '0')
+			return ;
+	} while (ch != 'Y' && ch != 'N') ;
+	if (ch == 'N')
+		return ;
+	if (issued(mcode))
+	{
+		gotoxy(5,15) ;
+		cout <<"\7RECORD CANNOT BE DELETED. MEMBER HAS A BOOK" ;
+		getch() ;
+		return ;
+	}
+	MEMBER::del_rec(mcode) ;
+	gotoxy(5,23) ;
+	cout <<"\7RECORD DELETED" ;
+	getch() ;
+}
+
+LIBMANAG.CPP
+Displaying LIBMANAG.CPP.
